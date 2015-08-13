@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SurvivalApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hintTxtItem">Enter an item here ...</string>
+    <string name="lblBtnAdd">Add Item</string>
+    <string name="txtEmpty">List is empty</string>
+    <string name="menu_list">Checklist</string>
+    <string name="menu_info">Travel Information</string>
+</resources>
