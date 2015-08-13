@@ -1,17 +1,22 @@
 package com.example.maxim.survivalapp;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import model.MainListItem;
+
 public class MainActivity extends ListActivity {
 
+    //ArrayList<MainListItem> listItemDB = new ArrayList<MainListItem>();
     ArrayList<String> listItem = new ArrayList<String>();
 
     ArrayAdapter<String> adapter;
@@ -42,7 +47,15 @@ public class MainActivity extends ListActivity {
         setListAdapter(adapter);
     }
 
-   /* @Override
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        String Item = this.listItem.get(position);
+        Intent MyIntent = new Intent(MainActivity.this, Main2Activity.class);
+        MyIntent.putExtra("Item", Item);
+        MainActivity.this.startActivity(MyIntent);
+    }
+
+    /* @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         saveState(outState);
