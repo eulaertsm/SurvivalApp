@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SurvivalApp</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="hintTxtItem">Voer item in</string>
+    <string name="hintTxtAmount">Voer Hoeveelheid in</string>
+    <string name="lblBtnAdd">Item toevoegen</string>
+    <string name="txtEmpty">Lijst is leeg</string>
+    <string name="menu_list">Checklist</string>
+    <string name="menu_info">Reis informatie</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="TxtAmount">Hoeveelheid</string>
+    <string name="TxtItem">Item</string>
+
+
+</resources>

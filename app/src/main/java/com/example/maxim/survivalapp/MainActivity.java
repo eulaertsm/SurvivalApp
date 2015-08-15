@@ -49,22 +49,26 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        String Item = this.listItem.get(position);
+        String Vacation = this.listItem.get(position);
         Intent MyIntent = new Intent(MainActivity.this, Main2Activity.class);
-        MyIntent.putExtra("Item", Item);
+        MyIntent.putExtra("Vacation", Vacation);
         MainActivity.this.startActivity(MyIntent);
     }
 
-    /* @Override
+
+
+     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        saveState(outState);
+
     }
 
-    private void restoreInstanceState(Bundle savedInstanceState){
-        saveState(savedInstanceState);
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
     }
 
+    /*
     private void saveState(Bundle state){
         //TODO
     }

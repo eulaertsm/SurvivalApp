@@ -1,6 +1,7 @@
 package com.example.maxim.survivalapp;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
@@ -36,7 +37,7 @@ public class Main2Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        String value = intent.getStringExtra("Item");
+        String value = intent.getStringExtra("Vacation");
 
         setContentView(R.layout.activity_main2);
 
@@ -54,6 +55,7 @@ public class Main2Activity extends AppCompatActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         switch(position){
             case 0:

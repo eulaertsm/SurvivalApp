@@ -9,6 +9,8 @@ public class MainListItem {
 
     private String country;
 
+    private ArrayList<String> Items = new ArrayList<String>();
+
     public String getCountry() {
         return country;
     }
@@ -17,7 +19,16 @@ public class MainListItem {
         this.country = country;
     }
 
-    public MainListItem(String country) {
+    public MainListItem(String country, ArrayList<String> Items) {
         this.country = country;
+        this.Items = Items;
+    }
+
+    public ArrayList<String> getItems() {
+        return Items;
+    }
+
+    public void setItems(ArrayList<String> items) {
+        Items = items;
     }
 }
