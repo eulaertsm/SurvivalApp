@@ -1,55 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <EditText
-        android:id="@+id/txtItem"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/hintTxtItem"
-        />
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lblBtnAdd"
-        android:layout_toRightOf="@id/txtItem"
-        />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtItem"
-        />
-
-    <TextView
-        android:id="@android:id/empty"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtItem"
-        android:text="@string/txtEmpty"
-        android:gravity="center_horizontal"
-        />
-
-</RelativeLayout>
-<!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="vertical">
 
-    <fragment
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.maxim.survivalapp.listFragment"
-        android:id="@+id/list_frag"
-        class="com.example.maxim.survivalapp.listFragment" />
+        android:layout_height="100dp"
+        android:src="@drawable/travel"
+        android:layout_marginTop="-10dp"
+        />
 
+    <LinearLayout
+        android:id="@+id/input_container"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="@dimen/form_margin"
+        android:layout_marginBottom="@dimen/form_margin"
+        android:layout_marginLeft="@dimen/form_margin"
+        android:layout_marginRight="@dimen/form_margin"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:paddingBottom="@dimen/form_padding"
+        android:paddingLeft="@dimen/form_padding"
+        android:paddingRight="@dimen/form_padding"
+        android:paddingTop="@dimen/form_padding"
+        style="@style/input_style"
+        >
+
+        <EditText
+            android:id="@+id/txtItem"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_marginLeft="2dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/hintTxtItem"
+            />
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:text="@string/lblBtnAdd"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="@dimen/form_margin"
+        android:layout_marginLeft="@dimen/form_margin"
+        android:layout_marginRight="@dimen/form_margin"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/form_padding"
+        android:paddingLeft="@dimen/form_padding"
+        android:paddingRight="@dimen/form_padding"
+        android:paddingTop="@dimen/form_padding"
+        style="@style/input_style"
+        />
 
 </LinearLayout>
--->

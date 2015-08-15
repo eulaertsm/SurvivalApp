@@ -5,21 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import model.MainListItem;
+import model.Destination;
 
 public class MainActivity extends ListActivity {
 
-    //ArrayList<MainListItem> listItemDB = new ArrayList<MainListItem>();
-    ArrayList<String> listItem = new ArrayList<String>();
+    //ArrayList<Destination> listItemDB = new ArrayList<Destination>();
+    private ArrayList<Destination> listItem = new ArrayList<Destination>();
 
-    ArrayAdapter<String> adapter;
+    private MainListAdapter adapter;
 
 
     @Override
@@ -30,13 +30,13 @@ public class MainActivity extends ListActivity {
 
         Button btn = (Button) findViewById(R.id.btnAdd);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItem);
+        //TODO adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItem.);
 
         OnClickListener listener = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText edit = (EditText) findViewById(R.id.txtItem);
-                listItem.add(edit.getText().toString());
+                listItem.add(new Destination(edit.getText().toString()));
                 edit.setText("");
                 adapter.notifyDataSetChanged();
             }
@@ -49,9 +49,9 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        String Vacation = this.listItem.get(position);
+        Destination Destination = this.listItem.get(position);
         Intent MyIntent = new Intent(MainActivity.this, Main2Activity.class);
-        MyIntent.putExtra("Vacation", Vacation);
+        MyIntent.putExtra("Destination", (Serializable) Destination);
         MainActivity.this.startActivity(MyIntent);
     }
 

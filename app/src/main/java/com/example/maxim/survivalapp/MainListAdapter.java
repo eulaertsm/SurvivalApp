@@ -1,65 +1,32 @@
 package com.example.maxim.survivalapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import model.MainListItem;
+import model.Destination;
 
-/**
- * Created by maxim on 11/08/15.
- */
-public class MainListAdapter extends BaseAdapter {
+public class MainListAdapter extends ArrayAdapter<Destination> {
 
-    private Context mContext;
-    private ArrayList<MainListItem> mItems;
+    private ArrayList<Destination> items;
 
-    public MainListAdapter(Context context, ArrayList<MainListItem> items) {
-        this.mItems = items;
-        this.mContext = context;
+    public MainListAdapter(Context context, int textViewResourceId, ArrayList<Destination> items){
+        super(context, textViewResourceId, items);
+        this.items = items;
     }
 
-    @Override
-    public int getCount() {
-        return this.mItems.size();
+    public View getView(int position,View convertView,ViewGroup parent){
+        LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View row = li.inflate(android.R.layout.simple_list_item_1, parent, false);
+
+        TextView text = (TextView) row.findViewById(android.R.id.text1);
+        text.setText(items.get(position).getDestination());
+
+        return row;
     }
-
-    @Override
-    public Object getItem(int position) {
-        if(!(position >= this.getCount())) {
-            return this.mItems.get(position);
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    public void deleteItem(int position){
-        this.mItems.remove(position);
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_frag, null);
-        }
-
-
-        return convertView;
-    }
-
 }
