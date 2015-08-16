@@ -7,16 +7,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import model.Destination;
+import model.Item;
 
-public class MainListAdapter extends ArrayAdapter<Destination> {
+/**
+ * Created by maxim on 16/08/15.
+ */
+public class MainList2Adapter extends ArrayAdapter<Item> {
 
-    private List<Destination> items;
+    private List<Item> items;
 
-    public MainListAdapter(Context context, int textViewResourceId, List<Destination> items){
+    public MainList2Adapter(Context context, int textViewResourceId, List<Item> items){
         super(context, textViewResourceId, items);
         this.items = items;
     }
@@ -26,7 +28,7 @@ public class MainListAdapter extends ArrayAdapter<Destination> {
         View row = li.inflate(android.R.layout.simple_list_item_1, parent, false);
 
         TextView text = (TextView) row.findViewById(android.R.id.text1);
-        text.setText(items.get(position).getDestination());
+        text.setText(items.get(position).getItem());
 
         return row;
     }

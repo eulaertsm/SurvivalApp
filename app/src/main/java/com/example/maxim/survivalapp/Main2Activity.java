@@ -38,8 +38,6 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        String value = intent.getStringExtra("Vacation");
 
         setContentView(R.layout.activity_main2);
 
@@ -62,8 +60,8 @@ public class Main2Activity extends AppCompatActivity
         switch(position){
             case 0:
                 fragmentManager.beginTransaction()
-                    .replace(R.id.container, InfoFragment.newInstance(position + 1))
-                    .commit();
+                        .replace(R.id.container, InfoFragment.newInstance(position + 1))
+                        .commit();
                 break;
             case 1:
                 fragmentManager.beginTransaction()

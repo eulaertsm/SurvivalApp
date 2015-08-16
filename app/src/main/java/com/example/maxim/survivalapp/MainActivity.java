@@ -1,25 +1,36 @@
 package com.example.maxim.survivalapp;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.maxim.survivalapp.dao.SurvivalDAO;
+import com.example.maxim.survivalapp.db.SQLiteHelper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Destination;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
     //ArrayList<Destination> listItemDB = new ArrayList<Destination>();
-    private ArrayList<Destination> listItem = new ArrayList<Destination>();
+    private List<Destination> listItem;
 
     private MainListAdapter adapter;
+
+    private SQLiteHelper db;
+    private SurvivalDAO dao;
+    private ListView lv;
 
 
     @Override
@@ -29,35 +40,40 @@ public class MainActivity extends ListActivity {
         setContentView(R.layout.activity_main);
 
         Button btn = (Button) findViewById(R.id.btnAdd);
+        lv = (ListView) findViewById(R.id.main_list);
 
-        //TODO adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItem.);
+        db = new SQLiteHelper(this);
+        dao = new SurvivalDAO(db);
 
+        listItem = dao.getAllDestinations();
+
+        adapter = new MainListAdapter(this, android.R.layout.simple_list_item_1, listItem);
+        lv.setAdapter(adapter);
         OnClickListener listener = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText edit = (EditText) findViewById(R.id.txtItem);
-                listItem.add(new Destination(edit.getText().toString()));
+                dao.saveDestination(new Destination(edit.getText().toString()));
+                listItem = dao.getAllDestinations();
                 edit.setText("");
-                adapter.notifyDataSetChanged();
+                adapter = new MainListAdapter(v.getContext(), android.R.layout.simple_list_item_1, listItem);
+                lv.setAdapter(adapter);
             }
         };
 
         btn.setOnClickListener(listener);
-
-        setListAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Destination Destination = listItem.get(position);
+                Intent MyIntent = new Intent(MainActivity.this, Main2Activity.class);
+                MyIntent.putExtra("Destination", Destination.getMyID());
+                MainActivity.this.startActivity(MyIntent);
+            }
+        });
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        Destination Destination = this.listItem.get(position);
-        Intent MyIntent = new Intent(MainActivity.this, Main2Activity.class);
-        MyIntent.putExtra("Destination", (Serializable) Destination);
-        MainActivity.this.startActivity(MyIntent);
-    }
-
-
-
-     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 

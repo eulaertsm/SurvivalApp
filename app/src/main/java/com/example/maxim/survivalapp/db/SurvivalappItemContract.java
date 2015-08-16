@@ -14,7 +14,6 @@ public final class SurvivalappItemContract {
         public static final String CULUMN_NAME_SURVIVALITEMID = "survivalitemid";
         public static final String CULUMN_NAME_ITEM = "item";
         public static final String CULUMN_NAME_SURVIVALID = "survivalid";
-        public static final String TASK_SUR = "fksur";
 
     }
 }

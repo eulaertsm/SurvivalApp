@@ -3,8 +3,8 @@
     <string name="app_name">SurvivalApp</string>
     <string name="action_settings">Instellingen</string>
     <string name="hintTxtItem">Voer item in</string>
-    <string name="hintTxtAmount">Voer Hoeveelheid in</string>
-    <string name="lblBtnAdd">Item toevoegen</string>
+    <string name="hintTxtDestination">Voer bestemming in</string>
+    <string name="lblBtnAdd">Toevoegen</string>
     <string name="txtEmpty">Lijst is leeg</string>
     <string name="menu_list">Checklist</string>
     <string name="menu_info">Reis informatie</string>
@@ -13,6 +13,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="TxtAmount">Hoeveelheid</string>
     <string name="TxtItem">Item</string>
-
+    <string name="loading">Inladen RSS-feed</string>
 
 </resources>

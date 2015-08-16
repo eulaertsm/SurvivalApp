@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import model.RSSItem;
 
 /**
- * Created by maxim on 16/08/15.
+ * Created by maxim on 15/08/2015.
  */
 public class RSSResponder {
     private static final String mUrl = "http://diplomatie.belgium.be/nl/Diensten/Op_reis_in_het_buitenland/reisadviezen/rss_chron.jsp";
     private ArrayList<RSSItem> mItems;
     private XmlPullParserFactory xmlFactoryObject;
-    public volatile boolean parsingComplete = true;
 
     //Lege constructor
     public RSSResponder() {
@@ -34,12 +33,11 @@ public class RSSResponder {
     public void parseXMLAndStore(XmlPullParser myParser) {
         int event;
         String text = null;
-        RSSItem newItem;
+        RSSItem newItem = null;
         try {
             event = myParser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
                 String name=myParser.getName();
-                newItem = new RSSItem();
                 switch (event){
                     case XmlPullParser.START_TAG:
                         break;
@@ -48,22 +46,24 @@ public class RSSResponder {
                         break;
                     case XmlPullParser.END_TAG:
                         if(name.equals("title")){
+                            newItem = new RSSItem();
                             newItem.setTitle(text);
                         }
                         else if(name.equals("link")){
-                            newItem.setLink(text);
+                            if(newItem != null) {
+                                newItem.setLink(text);
+                            }
                         }
                         else if(name.equals("description")){
                             newItem.setDescription(text);
+                            this.mItems.add(newItem);
                         }
                         else{
                         }
                         break;
                 }
-                this.mItems.add(newItem);
                 event = myParser.next();
             }
-            parsingComplete = false;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -72,35 +72,30 @@ public class RSSResponder {
 
 
     public void fetchXML(){
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(RSSResponder.mUrl);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        try {
+            URL url = new URL(RSSResponder.mUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-                    conn.setReadTimeout(10000);
-                    conn.setConnectTimeout(15000);
-                    conn.setRequestMethod("GET");
-                    conn.setDoInput(true);
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
 
-                    conn.connect();
-                    InputStream stream = conn.getInputStream();
+            conn.connect();
+            InputStream stream = conn.getInputStream();
 
-                    xmlFactoryObject = XmlPullParserFactory.newInstance();
-                    XmlPullParser myparser = xmlFactoryObject.newPullParser();
+            xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myparser = xmlFactoryObject.newPullParser();
 
-                    myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                    myparser.setInput(stream, null);
+            //myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            myparser.setInput(stream, "UTF_8");
 
-                    parseXMLAndStore(myparser);
-                    stream.close();
-                }
-                catch (Exception e) {
-                }
-            }
-        });
-        thread.start();
+            parseXMLAndStore(myparser);
+            stream.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -9,9 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
+    private static final int DATABASE_VERSION = 5;
+    private static final String DATABASE_NAME = "SurvivalAppDB";
 
-    public SQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public SQLiteHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -21,12 +23,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 SurvivalappContract.SurvivalEntry.CULUMN_NAME_DESTINATION + " TEXT )";
 
         db.execSQL(CREATE_SURVIVAL_TABLE);
+
+        String CREATE_SURVIVALITEM_TABLE = "CREATE TABLE " + SurvivalappItemContract.SurvivalItemEntry.TABLE_NAME + " ( " +
+                SurvivalappItemContract.SurvivalItemEntry.CULUMN_NAME_SURVIVALITEMID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                SurvivalappItemContract.SurvivalItemEntry.CULUMN_NAME_ITEM + " TEXT,"+
+                SurvivalappItemContract.SurvivalItemEntry.CULUMN_NAME_SURVIVALID + " INTEGER )";
+        db.execSQL(CREATE_SURVIVALITEM_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String UPGRADE_TABLE = "DROP TABLE IF EXISTS " + SurvivalappItemContract.SurvivalItemEntry.TABLE_NAME;
         db.execSQL(UPGRADE_TABLE);
+
+        String UPGRADE_TABLE2 = "DROP TABLE IF EXISTS " + SurvivalappContract.SurvivalEntry.TABLE_NAME;
+        db.execSQL(UPGRADE_TABLE2);
         this.onCreate(db);
     }
 

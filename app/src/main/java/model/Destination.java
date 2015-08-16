@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Destination {
 
-    private int myID = 0;
+    private int myID;
 
     private String destination;
 
@@ -29,9 +29,16 @@ public class Destination {
         this.destination = destination;
     }
 
+    public Destination(){}
+
     public Destination(String destination, ArrayList<Item> Items) {
         this.destination = destination;
         this.Items = Items;
+    }
+
+    public Destination(int id, String destination) {
+        this.myID = id;
+        this.destination = destination;
     }
 
     public Destination(String destination) {

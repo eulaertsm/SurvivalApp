@@ -2,15 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/travel"
+        android:layout_marginTop="-10dp"
+        />
 
     <LinearLayout
         android:id="@+id/input_container"
         android:layout_width="fill_parent"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="@dimen/form_margin"
+        android:layout_marginBottom="@dimen/form_margin"
+        android:layout_marginLeft="@dimen/form_margin"
+        android:layout_marginRight="@dimen/form_margin"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="4"
+        android:paddingBottom="@dimen/form_padding"
+        android:paddingLeft="@dimen/form_padding"
+        android:paddingRight="@dimen/form_padding"
+        android:paddingTop="@dimen/form_padding"
+        style="@style/input_style"
         >
 
         <EditText
@@ -20,7 +35,7 @@
             android:layout_marginLeft="2dp"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/hintTxtItem"
+            android:hint="@string/hintTxtDestination"
             />
         <Button
             android:id="@+id/btnAdd"
@@ -33,9 +48,18 @@
     </LinearLayout>
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/main_list"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:layout_marginBottom="@dimen/form_margin"
+        android:layout_marginLeft="@dimen/form_margin"
+        android:layout_marginRight="@dimen/form_margin"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/form_padding"
+        android:paddingLeft="@dimen/form_padding"
+        android:paddingRight="@dimen/form_padding"
+        android:paddingTop="@dimen/form_padding"
+        style="@style/input_style"
         />
 
 </LinearLayout>

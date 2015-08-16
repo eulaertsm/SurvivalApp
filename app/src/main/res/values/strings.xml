@@ -2,8 +2,8 @@
     <string name="app_name">SurvivalApp</string>
     <string name="action_settings">Settings</string>
     <string name="hintTxtItem">Enter item</string>
-    <string name="hintTxtAmount">Enter amount</string>
-    <string name="lblBtnAdd">Add Item</string>
+    <string name="hintTxtDestination">Enter Destination</string>
+    <string name="lblBtnAdd">Add</string>
     <string name="txtEmpty">List is empty</string>
     <string name="menu_list">Checklist</string>
     <string name="menu_info">Travel Information</string>
@@ -12,5 +12,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="TxtAmount">Amount</string>
     <string name="TxtItem">Item</string>
+    <string name="loading">Loading RSS-feed</string>
 
 </resources>

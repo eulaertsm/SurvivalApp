@@ -3,6 +3,7 @@ package com.example.maxim.survivalapp;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,14 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.view.View.OnClickListener;
 
+import com.example.maxim.survivalapp.dao.SurvivalDAO;
+import com.example.maxim.survivalapp.db.SQLiteHelper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import model.Item;
 
 /**
  * Created by Maxim on 8/08/15.
@@ -26,10 +32,15 @@ public class ChecklistFragment extends Fragment{
 //    private List<HashMap<String, String>> CheckList = new ArrayList<HashMap<String, String>>();
 //    public static final String ITEM_COLUMN = "Item";
 //    public static final String AMOUNT_COLUMN = "Amount";
-    private Activity activity;
+private Activity activity;
     private static final String ARG_SECTION_NUMBER = "section_number";
-    ArrayList<String> listItem = new ArrayList<String>();
-    ArrayAdapter<String> adapter;
+    List<Item> listItem;
+    MainList2Adapter adapter;
+    private SurvivalDAO dao;
+    private SQLiteHelper db;
+    private int destID;
+    private ListView lview;
+    private EditText edit;
 
 
     public static ChecklistFragment newInstance(int sectionNumber) {
@@ -44,14 +55,36 @@ public class ChecklistFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listItem.add("Test");
         View view = inflater.inflate(R.layout.checklist, container, false);
-        ListView lview = (ListView) view.findViewById(R.id.listview);
+        lview = (ListView) view.findViewById(R.id.listview);
 
         Button btn = (Button) view.findViewById(R.id.btnAdd);
 
-        adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
+        Activity a = (Activity) view.getContext();
+        Intent intent = a.getIntent();
+        int value = intent.getIntExtra("Destination", 0);
+        destID = value;
+
+        db = new SQLiteHelper(view.getContext());
+        dao = new SurvivalDAO(db);
+
+        listItem = dao.getAllItemsById(value);
+
+        adapter = new MainList2Adapter(view.getContext(), android.R.layout.simple_list_item_1, listItem);
         lview.setAdapter(adapter);
+
+        edit = (EditText) view.findViewById(R.id.txtItem);
+
+        btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dao.saveItem(new Item(edit.getText().toString(), destID));
+                listItem = dao.getAllItemsById(destID);
+                edit.setText("");
+                adapter = new MainList2Adapter(v.getContext(), android.R.layout.simple_list_item_1, listItem);
+                lview.setAdapter(adapter);
+            }
+        });
 
        /* OnClickListener listener = new OnClickListener() {
             @Override

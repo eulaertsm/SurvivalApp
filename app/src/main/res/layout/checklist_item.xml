@@ -14,12 +14,4 @@
         android:text="@string/TxtItem"
         />
 
-    <TextView
-        android:width="130dp"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:id="@+id/Amount"
-        android:text="@string/TxtAmount"
-        />
-
 </LinearLayout>
