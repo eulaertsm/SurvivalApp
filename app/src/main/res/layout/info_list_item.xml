@@ -18,6 +18,7 @@
         android:paddingTop="@dimen/form_padding"
         android:text="Reisadvies Griekenland"
         style="@style/input_style"
+        android:textStyle="bold"
         />
 
     <TextView
