@@ -1,9 +1,12 @@
 package com.example.maxim.survivalapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -60,6 +63,36 @@ public class MainActivity extends Activity {
                 lv.setAdapter(adapter);
             }
         };
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, final View view, int position, long id) {
+                listItem = dao.getAllDestinations();
+                final Destination destination = listItem.get(position);
+                final View lview = view;
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Delete " + destination.getDestination() + "?");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (dialog != null) dialog.dismiss();
+                    }
+                });
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (dialog != null) dialog.dismiss();
+                        dao.deleteDestination(destination);
+                        listItem = dao.getAllDestinations();
+                        adapter = new MainListAdapter(lview.getContext(), android.R.layout.simple_list_item_1, listItem);
+                        lv.setAdapter(adapter);
+                    }
+                });
+                builder.create().show();
+                return true;
+            }
+        });
 
         btn.setOnClickListener(listener);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
