@@ -110,20 +110,8 @@ public class Main2Activity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
-            return true;
-        }*/
 
         return super.onOptionsItemSelected(item);
     }
 
-
-
-    public void addnewitem(View view){
-        EditText edit = (EditText) view.findViewById(R.id.txtItem);
-        //TODO listItem.add(edit.getText().toString());
-        edit.setText("");
-        //adapter.notifyDataSetChanged();
-    }
 }

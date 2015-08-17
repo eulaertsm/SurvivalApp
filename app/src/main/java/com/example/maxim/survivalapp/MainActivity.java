@@ -26,7 +26,6 @@ import model.Destination;
 
 public class MainActivity extends Activity {
 
-    //ArrayList<Destination> listItemDB = new ArrayList<Destination>();
     private List<Destination> listItem;
 
     private MainListAdapter adapter;
@@ -117,25 +116,6 @@ public class MainActivity extends Activity {
         super.onRestoreInstanceState(state);
     }
 
-    /*
-    private void saveState(Bundle state){
-        //TODO
-    }
-
-    private void doCreate(Bundle savedInstanceState){
-        setContentView(R.layout.activity_main);
-
-        //if (null != savedInstanceState) restoreInstanceState(savedInstanceState);
-
-        ActionBar bar = getActionBar();
-        //bar.setDisplayShowTitleEnabled(false);
-        //bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        String[] names = {"Checklist", "Info"};
-        int fragments[] = { R.id.check_frag, R.id.info_frag };
-        TabManager.initialize(this, 0, names, fragments);
-    }
-*/
 
 
 }

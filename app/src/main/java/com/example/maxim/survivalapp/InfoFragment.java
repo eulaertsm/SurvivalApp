@@ -44,8 +44,12 @@ public class InfoFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        new RSSReader().execute();
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null || !savedInstanceState.containsKey("key")) {
+            new RSSReader().execute();
+        } else {
+            mItems = savedInstanceState.getParcelableArrayList("key");
+        }
     }
 
     @Override
@@ -102,4 +106,9 @@ public class InfoFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("key", mItems);
+        super.onSaveInstanceState(outState);
+    }
 }
